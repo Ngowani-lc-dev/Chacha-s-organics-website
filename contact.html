@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact-form</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="contact.css">
+
+ <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+
+ <section id="contact" class="contact-section">
+      <h1>Contact Us</h1>
+      <p><b>We’d love to hear from you! Reach out to us using any of the methods below.</b></p>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="info-item">
+          <h3>📍 Address</h3>
+          <p>Kabwata Market,<br> 
+            Lusaka , Zambia.</p>
+        </div>
+
+        <div class="info-item">
+  <h3>📞 Phone</h3>
+  <p>
+    <a href="tel:+260 777924272">+260 777924272</a>
+  </p>
+</div>
+
+
+        <div class="info-item">
+          <h3>✉️ Email</h3>
+          <p>bodylogicm@gmail.com</p>
+        </div>
+      </div>
+
+     
+      <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3845.9212471701912!2d28.305199773631628!3d-15.434801285156455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19408cc9075b4a51%3A0x2373ace2267e87b7!2sRyan!5e0!3m2!1sen!2sza!4v1768577192496!5m2!1sen!2sza" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+       
+      </div>
+
+    </section>
+
+  <div class="container">
+  <form id="contactForm">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname"><b>First Name</b></label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" placeholder="Your name.." required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="lname"><b>Last Name</b></label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" placeholder="Your last name.." required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="product"><b>Product</b></label>
+      </div>
+      <div class="col-75">
+
+        <select id="product" required>
+          <option value="Coconut Oil">Choose Product
+          </option>
+          <option value="Peppermint Sugar Base Body Scrub">Peppermint Sugar Base Body Scrub</option>
+          <option value="Lavender Sugar Base Body Scrub">Lavender Sugar Base Body Scrub</option>
+          <option value="Bubblegum Sugar Base Body Scrub">Bubblegum Sugar Base Body Scrub</option>
+          <option value="Citrus Sugar Base Body Scrub">Citrus Sugar Base Body Scrub</option>
+          <option value="Coconut Oil">Coconut Oil</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="subject"><b>Message</b></label>
+      </div>
+      <div class="col-75">
+        <textarea id="subject" placeholder="Send us a message.." style="height:200px" required></textarea>
+      </div>
+    </div>
+
+   <div class="row">
+  <div class="row">
+  <button type="button" id="sendBtn" class="submit-btn">Send Message</button>
+</div>
+
+</div>
+
+  </form>
+</div>
+
+<div class="info-item">
+  <h3> WhatsApp</h3>
+  <p>
+ <a href="https://wa.me/260777924272?text=Hello%20Chacha%27s%20Body-Logic%20Scrubs!"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="whatsapp-btn">
+  Chat with us on WhatsApp
+</a>
+
+
+  </p>
+    <a href="index.html">
+  <button class="home-btn">Home</button>
+</a>
+</div>
+</div>
+
+<script src="contact.js"></script>
+
+</body>
+</html>

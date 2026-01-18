@@ -1,0 +1,135 @@
+body {
+  background-image: white;
+  font-family: "Georgia", serif;
+ 
+  color: #333;
+  margin: 0;
+  padding: 40px;
+}
+
+
+.profile-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.column h3 {
+  color: #4b2e2e;
+  margin-bottom: 10px;
+}
+
+.logo {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.contact, .location {
+  margin-top: 20px;
+}
+
+.products-section {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.benefits ul {
+  padding-left: 20px;
+}
+
+.benefits li {
+  margin-bottom: 8px;
+}
+
+.highlight {
+  margin: 30px 0;
+  font-style: italic;
+  color: #6a2c70;
+}
+
+.brand-box {
+  background: #0a7c6b;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.brand-box h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+@media (max-width: 1024px) {
+  .profile-container,
+  .products-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  .profile-container,
+  .products-section {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  .brand-box {
+    padding: 20px;
+  }
+
+  .brand-box h2 {
+    font-size: 22px;
+  }
+}
+.home-btn{
+  padding-right: 40px;
+ text-align: center;
+  padding-top: 15px;
+   padding-left: 40px;
+  padding-bottom: 15px;
+  background-color: hsl(187, 87%, 47%);
+  border-radius: 5%;
+  margin-bottom: 30px;
+
+}
+.home-btn:hover{
+ background: #1ebe5b;
+}

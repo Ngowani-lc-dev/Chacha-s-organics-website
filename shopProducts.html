@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <title>Shop Products</title>
+    <style>
+       body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+.products {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+}
+
+.product img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+button {
+  background: #25D366;
+  border: none;
+  padding: 10px 16px;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #1da851;
+  transform: scale(1.05);
+}
+
+h3{
+  text-align: center;
+}
+
+/* Cart list container */
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+/* Each cart item */
+.cart-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+/* Item name and price */
+.cart-list li span {
+  display: block;
+}
+
+/* Remove button */
+.cart-list li button {
+  background: #171616;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 8px; /* small space from text */
+}
+
+/* Hover effect for remove button */
+.cart-list li button:hover {
+  background: #e63946;
+}
+
+/* Total price styling */
+.cart-total {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+
+.badge {
+  position: absolute;
+  background: #ff4081;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  top: 10px;
+  left: 10px;
+}
+/* Container */
+.customer-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Form row: label + input */
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Labels */
+.form-row label {
+  width: 90px;
+  font-weight: 500;
+}
+
+/* Inputs & Selects */
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+  width: 100%;
+  background: #25D366;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe5b;
+}
+
+    </style>
+    <script>
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+updateCart();
+
+function addToCart(id, name, price) {
+  const existingItem = cart.find(item => item.id === id);
+
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({
+      id,
+      name,
+      price,
+      quantity: 1
+    });
+  }
+
+  saveCart();
+  updateCart();
+}
+
+
+ 
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  saveCart();
+  updateCart();
+}
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCart() {
+  const cartList = document.getElementById('cart');
+  const totalEl = document.getElementById('total');
+
+  cartList.innerHTML = '';
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+
+    const li = document.createElement('li');
+   li.innerHTML = `
+  <span>${item.name} - K${item.price} × ${item.quantity}</span>
+  <button onclick="removeFromCart(${index})">❌</button>
+`;
+
+    cartList.appendChild(li);
+  });
+
+  totalEl.textContent = total;
+}
+
+function whatsappCheckout() {
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const delivery = document.getElementById("deliveryOption").value;
+
+  if (!name || !phone || !delivery) {
+    alert("Please fill in all customer details.");
+    return;
+  }
+
+  let message = ` *NEW ORDER*\n\n`;
+  message += ` NAME: ${name}\n`;
+  message += ` PHONE: ${phone}\n`;
+  message += `DELIVERY OPTION: ${delivery}\n\n`;
+  message += ` *ITEMS ORDERED:*\n`;
+
+  cart.forEach((item, index) => {
+    message += `${index + 1}. ${item.name}\n`;
+    message += `   Qty: ${item.quantity} × K${item.price}\n`;
+  });
+
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  message += `\n *TOTAL: K${total}*\n`;
+  message += `\nThank you! Please confirm availability. `;
+
+  const whatsappNumber = "260777924272";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
+
+  // Clear cart before redirect
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCart();
+
+  // Clear inputs
+  document.getElementById("customerName").value = "";
+  document.getElementById("customerPhone").value = "";
+  document.getElementById("deliveryOption").value = "";
+
+  window.location.href = whatsappURL;
+}
+
+    </script>
+   
+</head>
+<body>
+    <div class="products">
+
+  <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20260112-212320_WhatsApp.jpg" alt="Bubblegum Scrub">
+    <h3>Bubblegum Scrub</h3>
+    <p>Price: K250</p>
+    <button onclick="addToCart(1, 'Bubblegum Scrub', 250)">
+      Add to Cart
+    </button>
+  </div>
+
+  <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20260112-212313_WhatsApp.jpg" alt="Coconut Oil">
+    <h3>Coconut Oil with Scrub</h3>
+    <p>Price: K310</p>
+    <button onclick="addToCart(2,'Coconut Oil & Scrub', 310)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src=" IMG-20251220-WA0015.jpg" alt="Coconut Oil">
+    <h3>Coconut Oil with peppermint scrub</h3>
+    <p>Price: K310</p>
+    <button onclick="addToCart(3,'Coconut Oil & peppermint Scrub', 310)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="IMG-20251220-WA0016.jpg" alt="Coconut Oil">
+    <h3>Coconut Oil with citrus scrub</h3>
+    <p>Price: K310</p>
+    <button onclick="addToCart(4,'Coconut Oil & Citrus Scrub', 310)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20251212-134019_WhatsApp.jpg" alt="Lavender">
+    <h3>Lavender scrub</h3>
+    <p>Price: K250</p>
+    <button onclick="addToCart(5,'Lavender scrub', 250)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20260113-182458_WhatsApp.jpg" alt="Citrus">
+    <h3>350ml Citrus Scrub</h3>
+    <p>Price: K250</p>
+    <button onclick="addToCart(6,'Citrus Scrub', 250)">
+      Add to Cart
+    </button>
+  </div>
+
+  <div class="product">
+    <span class="badge">NEW</span>
+    <img src="IMG-20260116-WA0012-Picsart-BackgroundRemover.jpg.png" alt="coconut oil">
+    <h3>100ml Coconut Oil</h3>
+    <p>Price: K60</p>
+    <button onclick="addToCart(7,'Coconut Oil', 60)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="FB_IMG_1768590808215.jpg" alt="Coffee Scrub">
+    <h3>250ml Citrus Scrub</h3>
+    <p>Price: K200</p>
+    <button onclick="addToCart(8,'Citrus Scrub', 200)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="IMG-20260116-WA0020.jpg" alt="body scrub">
+    <h3>250ml Body Scrub</h3>
+    <p>Price: K200</p>
+    <button onclick="addToCart(9,'Body Scrub', 200)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="motion_photo_8331286052523282795-Picsart-BackgroundRemover.jpg.png" alt="retinol">
+    <h3>30ml Retinol Face Oil</h3>
+    <p>Price: K100</p>
+    <button onclick="addToCart(10,'Retinol serum', 100)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20260113-182504_WhatsApp.jpg" alt="Peppermint">
+    <h3>350ml peppermint Scrub</h3>
+    <p>Price: K250</p>
+    <button onclick="addToCart(11,'peppermint Scrub', 250)">
+      Add to Cart
+    </button>
+  </div>
+
+   <div class="product">
+    <span class="badge">NEW</span>
+    <img src="Screenshot_20251214-115838_WhatsApp.jpg " alt="Sugar & Honey">
+    <h3>Sugar & Honey Scrub</h3>
+    <p>Price: K150</p>
+    <button onclick="addToCart(12,'Sugar & Honey', 150)">
+      Add to Cart
+    </button>
+  </div>
+
+</div>
+
+<hr>
+
+<h2>🛒 Cart</h2>
+
+<ul id="cart" class="cart-list"></ul>
+<p class="cart-total"><strong>Total: K<span id="total">0</span></strong></p>
+
+
+
+<h3>Customer Details</h3>
+
+<div class="customer-form">
+
+  <div class="form-row">
+    <label for="customerName"><b>Name</b>:</label>
+    <input type="text" id="customerName" placeholder="Your Name">
+  </div>
+
+  <div class="form-row">
+    <label for="customerPhone"><b>Phone</b>:</label>
+    <input type="tel" id="customerPhone" placeholder="Phone Number">
+  </div>
+
+  <div class="form-row">
+    <label for="deliveryOption"><b>Option</b>:</label>
+    <select id="deliveryOption">
+      <option value="">Select Delivery Option</option>
+      <option value="Pickup">Pickup</option>
+      <option value="Delivery">Delivery</option>
+    </select>
+  </div>
+
+  <button class="whatsapp-btn" onclick="whatsappCheckout()">
+    Submmit via WhatsApp
+  </button>
+
+</div>
+
+ <a href="index.html">
+  <button class="home-btn">Home</button>
+</a>
+
+</body>
+</html>
