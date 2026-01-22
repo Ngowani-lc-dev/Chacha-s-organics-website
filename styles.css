@@ -67,11 +67,13 @@ body {
 
   /* Container adjusts only on mobile */
   .container {
-    position: relative !important;  /* remove absolute only on mobile */
-    margin: 0 10px !important;      /* small margin for breathing room */
-    width: auto !important;          /* full width inside viewport */
-    padding: 0 !important;
+    position: relative;  
+    margin: 0 10px ;     
+    width: auto ;         
+    padding: 0;
   }
+
+
 
   /* Navbar wraps links instead of cutting off */
   .topnav {
@@ -171,7 +173,7 @@ img {vertical-align: middle;
   font-style: italic;
 }
 
-/* Number text (1/3 etc) */
+
 .numbertext {
   color: #270101;
   font-size: 12px;
@@ -180,7 +182,6 @@ img {vertical-align: middle;
   top: 0;
 }
 
-/* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -210,10 +211,13 @@ img {vertical-align: middle;
 }
 
 /* On smaller screens, decrease text size */
-@media only screen and (max-width: 400px) {
-  .prev, .next {font-size: 12px}
+@media only screen and (max-width: 700px) {
+  .prev, .next {font-size: 10px}
 
-.text {font-size: 10px}
+.text {font-size: 8px;
+        margin-top: 100px;
+
+}
 
 
   footer {
@@ -223,7 +227,7 @@ img {vertical-align: middle;
     }
 
     .mySlides img{
-      height: 300px;
+      height: 200px;
     }
 
  .topnav img {
@@ -344,6 +348,34 @@ footer p{
   margin-bottom: 12px;
 }
 
+
+/* Mobile styles for About Hero */
+@media (max-width: 768px) {
+
+  .about-hero {
+    height: 60vh;              
+    padding: 20px;              
+    background-position: top;  
+  }
+
+  .about-hero .overlay {
+    max-width: 90%;            
+    padding: 10px;             
+  }
+
+  .about-hero h1 {
+    font-size: 22px;            
+    margin-bottom: 15px;
+  }
+
+  .about-hero p {
+    font-size: 15px;            
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+}
+
 /* Founder Section */
 .founder-section {
   max-width: 900px;
@@ -378,6 +410,8 @@ footer p{
 .founder-text {
   max-width: 500px;
   text-align: left;
+ 
+
 }
 
 .founder-text h3 {
@@ -407,6 +441,11 @@ footer p{
 
   .founder-text {
     text-align: center;
+  }
+
+  .founder-text p{
+     font-size: 14px;
+  line-height: 1.3;
   }
 }
 
@@ -556,6 +595,63 @@ footer p{
 }
 
 
+@media (max-width: 768px) {
 
+  /* Fix slideshow container for mobile */
+  .slideshow-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
 
+  /* Override image size ONLY on mobile */
+  .mySlides img {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;
+  }
+
+  /* Fix caption text position on mobile */
+  .text {
+    position: static;
+    margin-left: 0;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+     margin-top: 4px; 
+    line-height: 1.3;
+     padding: 6px 8px; 
+  }
+
+  /* Adjust slide number text */
+  .numbertext {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  /* Fix arrows position on mobile */
+  .prev,
+  .next {
+    top: 45%;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .next {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #home {
+    background-size:auto 100% ;   /* makes the whole image fit */
+    background-position: top center;  /* adjust vertical alignment */
+  
+  }
+
+   #home .overlay-text {
+    padding: 50px 10px 20px 10px;
+    font-size: 16px;  /* smaller text for mobile */
+  }
+}
   
